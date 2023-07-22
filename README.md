@@ -24,6 +24,12 @@ https://misty-sheath-dress-wasp.cyclic.app/insert?email=[Your email insert]&pass
 https://misty-sheath-dress-wasp.cyclic.app/update/?email=[Your Email]&time=[Ypur Time Set second]
 ```
 
+## Delete
+### Method: get
+```url
+https://misty-sheath-dress-wasp.cyclic.app/delete/?email=[Your Email]
+```
+
 ## Login
 ### Method: post
 ```url
