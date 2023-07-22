@@ -131,7 +131,7 @@ app.post('/register', (req, res) => {
 
     conn.query(selectSql, [Email], (err, result, firelds) => {
         if (err) throw err;
-        if (result === '') {
+        if (result[0] == '') {
             var insertSql = "INSERT INTO users(Email, Password, Time) VALUES (?, ?, 0.00)";
 
             conn.query(insertSql, [Email, Password], (err, result, fields) => {
