@@ -86,6 +86,38 @@ app.get('/delete', (req, res)=>{
     })
 })
 
+app.post('/login', (req, res)=>{
+    const Email = req.query.email;
+    const Password = req.query.password;
+
+    var select = "SELECT * FROM users WHERE Email = ?";
+
+    conn.query(select, [Email], (err, result, fields)=>{
+        if(err)throw err;
+        if(result == ''){
+            res.send({
+                Status: 400,
+                Message: "Not found email",
+                Email: Email
+            })
+        }else{
+            const r = result[0]
+            if(r.Password === Password){
+                res.send({
+                    Status: 200,
+                    Message: "Login Success",
+                    UserDetail: r
+                })
+            }else{
+                res.send({
+                    Status: 400,
+                    Message: "Password not correct"
+                })
+            }
+        }
+    })
+})
+
 app.listen('3200', () => {
     console.log("Listening");
 })
