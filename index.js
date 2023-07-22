@@ -55,6 +55,7 @@ app.post('/insert', (req, res) => {
     })
 })
 
+// Update
 app.get('/update', (req, res)=>{
     const email = req.query.email;
     const time = req.query.time;
@@ -62,6 +63,21 @@ app.get('/update', (req, res)=>{
     var sql = "UPDATE `users` SET `Time`=? WHERE Email = ?";
 
     conn.query(sql, [time, email], (err, result, fields)=>{
+        if(err)throw err;
+        res.send({
+            Status: 200,
+            Message: "Good..."
+        })
+    })
+})
+
+// Delete
+app.get('/delete', (req, res)=>{
+    var email = req.query.email;
+
+    var sql = "DELETE FROM users WHERE Email = ?";
+
+    conn.query(sql, [email], (err, result, fields)=>{
         if(err)throw err;
         res.send({
             Status: 200,
