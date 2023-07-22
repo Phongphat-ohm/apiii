@@ -39,14 +39,14 @@ app.post('/insert', (req, res) => {
         if (result == '') {
             var sqlInsert = `INSERT INTO users(Email, Password, Time) VALUES (?, ?, 0.00)`;
 
-            conn.query(sqlInsert, [email, password], (err, result, fields)=>{
-                if(err)throw err;
+            conn.query(sqlInsert, [email, password], (err, result, fields) => {
+                if (err) throw err;
                 res.send({
                     Status: 200,
                     Message: "Goodddd..."
                 });
             });
-        }else{
+        } else {
             res.send({
                 Status: 400,
                 Message: "This email already exists"
@@ -56,14 +56,14 @@ app.post('/insert', (req, res) => {
 })
 
 // Update
-app.get('/update', (req, res)=>{
+app.get('/update', (req, res) => {
     const email = req.query.email;
     const time = req.query.time;
 
     var sql = "UPDATE `users` SET `Time`=? WHERE Email = ?";
 
-    conn.query(sql, [time, email], (err, result, fields)=>{
-        if(err)throw err;
+    conn.query(sql, [time, email], (err, result, fields) => {
+        if (err) throw err;
         res.send({
             Status: 200,
             Message: "Good..."
@@ -72,13 +72,13 @@ app.get('/update', (req, res)=>{
 })
 
 // Delete
-app.get('/delete', (req, res)=>{
+app.get('/delete', (req, res) => {
     var email = req.query.email;
 
     var sql = "DELETE FROM users WHERE Email = ?";
 
-    conn.query(sql, [email], (err, result, fields)=>{
-        if(err)throw err;
+    conn.query(sql, [email], (err, result, fields) => {
+        if (err) throw err;
         res.send({
             Status: 200,
             Message: "Good..."
@@ -86,34 +86,66 @@ app.get('/delete', (req, res)=>{
     })
 })
 
-app.post('/login', (req, res)=>{
+app.post('/login', (req, res) => {
     const Email = req.query.email;
     const Password = req.query.password;
 
     var select = "SELECT * FROM users WHERE Email = ?";
 
-    conn.query(select, [Email], (err, result, fields)=>{
-        if(err)throw err;
-        if(result == ''){
+    conn.query(select, [Email], (err, result, fields) => {
+        if (err) throw err;
+        if (result == '') {
             res.send({
                 Status: 400,
                 Message: "Not found email",
                 Email: Email
             })
-        }else{
+        } else {
             const r = result[0]
-            if(r.Password === Password){
+            if (r.Password === Password) {
                 res.send({
                     Status: 200,
                     Message: "Login Success",
                     UserDetail: r
                 })
-            }else{
+            } else {
                 res.send({
                     Status: 400,
                     Message: "Password not correct"
                 })
             }
+        }
+    })
+})
+
+app.post('/register', (req, res) => {
+    let Email = req.query.email;
+    let Password = req.body.password;
+
+    var selectSql = "SELECT * FROM  users WHERE Email = ?";
+
+    conn.query(selectSql, [Email], (err, result, firelds) => {
+        if (err) throw err;
+        if (result == '') {
+            var insertSql = "INSERT INTO users(Email, Password, Time) VALUES (?, ?, 0.00)";
+
+            conn.query(insertSql, [Email, Password], (err, result, fields) => {
+                if (err) throw err;
+                res.send({
+                    Status: 200,
+                    Message: "Register Success",
+                    UserDisp: {
+                        Email: Email,
+                        Password: Password,
+                        Time: 0.00
+                    }
+                })
+            })
+        } else {
+            res.send({
+                Status: 400,
+                Messgae: "This email already exists"
+            })
         }
     })
 })
