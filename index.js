@@ -125,7 +125,7 @@ app.post('/login', (req, res) => {
 
 app.post('/register', (req, res) => {
     let Email = req.query.email;
-    let Password = req.body.password;
+    let Password = req.query.password;
 
     var selectSql = "SELECT * FROM  users WHERE Email = ?";
 
