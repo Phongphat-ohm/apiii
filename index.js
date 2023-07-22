@@ -124,35 +124,33 @@ app.post('/login', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
-    let Email = req.query.email;
-    let Password = req.query.password;
+    var email = req.query.email;
+    var password = req.query.password;
 
-    var selectSql = "SELECT * FROM  users WHERE Email = ?";
+    var sqlSelect = "SELECT * FROM users WHERE Email = ?";
 
-    conn.query(selectSql, [Email], (err, result, firelds) => {
+    conn.query(sqlSelect, [email], (err, result, fields) => {
         if (err) throw err;
-        if (result[0] == '') {
-            var insertSql = "INSERT INTO users(Email, Password, Time) VALUES (?, ?, 0.00)";
+        if (result == '') {
+            var sqlInsert = `INSERT INTO users(Email, Password, Time) VALUES (?, ?, 0.00)`;
 
-            conn.query(insertSql, [Email, Password], (err, result, fields) => {
+            conn.query(sqlInsert, [email, password], (err, result, fields) => {
                 if (err) throw err;
                 res.send({
                     Status: 200,
-                    Message: "Register Success",
-                    UserDisp: {
-                        Email: Email,
-                        Password: Password,
-                        Time: 0.00
+                    Message: "Goodddd...",
+                    UserDis: {
+                      Email: email,
+                      Pasword: password
                     }
-                })
-            })
+                });
+            });
         } else {
             res.send({
                 Status: 400,
-                Messgae: "This email already exists"
-            })
+                Message: "This email already exists"
+            });
         }
-        console.log(result);
     })
 })
 
