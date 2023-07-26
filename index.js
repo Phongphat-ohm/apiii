@@ -7,7 +7,9 @@ const cors = require('cors');
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use(express.static('/public'));
+app.get('/api.png', (req, res)=>{
+    res.sendFile(__dirname + "/public/api.png");
+})
 
 app.get('/', (req, res)=>{
     res.sendFile(__dirname + '/index.html');
