@@ -3,13 +3,13 @@
 ## SELECT *
 ### Method: get
 ```url
-https://misty-sheath-dress-wasp.cyclic.app/get
+[https://misty-sheath-dress-wasp.cyclic.app](https://ppkxbapi.cyclic.app)/get
 ```
 
 ## SELECT Where
 ### Method: get
 ```url
-https://misty-sheath-dress-wasp.cyclic.app/get/where?email=[Your email select]
+[https://misty-sheath-dress-wasp.cyclic.app](https://ppkxbapi.cyclic.app)/get/where?email=[Your email select]
 ```
 
 ## Insert
