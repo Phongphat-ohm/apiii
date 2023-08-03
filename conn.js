@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 const conn = mysql.createConnection({
     host: 'sql.freedb.tech',
     user: 'freedb_ppkxb15',
-    password: '!*45#GF6sDeuZbS',
+    password: 'kb@6QSNYs5PK%W*',
     database: 'freedb_ppkxb15',
     port: 3306
 });

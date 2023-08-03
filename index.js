@@ -159,6 +159,52 @@ app.post('/register', (req, res) => {
     })
 })
 
+// Song API
+
+// Get Song
+app.get('/song/get', (req, res)=>{
+    var sql = "SELECT * FROM song"
+    conn.query(sql, (err, result, fields)=>{
+        if(err)throw err;
+        res.send(result)
+    })
+})
+
+// Add Song
+app.post("/song/insert", (req, res)=>{
+    const src = req.query.src
+    const name = req.query.name
+
+    const sql = `INSERT INTO song(src, name) VALUES (?,?)`;
+
+    conn.query(sql, [src, name], (err, result, fields)=>{
+        if(err)throw err;
+        res.send({
+            Status: 200,
+            Message: "Insert Success"
+        })
+    })
+})
+
+// More Insert
+// app.post('/song/insert/more', (req, res)=>{
+//     const body = req.body
+
+//     for(var i=0; i<body.length; i++){
+//         var src = body[i].src
+//         var name = body[i].name
+
+//         const sql = `INSERT INTO song(src, name) VALUES (?,?)`;
+
+//         conn.query(sql, [src, name])
+//     }
+
+//     res.send({
+//         Status: 200,
+//         Message: "Insert Success"
+//     })
+// })
+
 app.listen('3200', () => {
     console.log("Listening");
 })
