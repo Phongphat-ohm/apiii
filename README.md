@@ -41,3 +41,9 @@ https://ppkxbapi.cyclic.app/login/?email=[Your Email]&password=[Your Password]
 ```url
 https://ppkxbapi.cyclic.app/register/?email=[Your Email]&password=[Your Password]
 ```
+
+## Song Data
+## Method: get
+```url
+https://ppkxbapi.cyclic.app/song/get
+```
